@@ -29,7 +29,7 @@ $commentText = userCommentTextById($_GET['updComm']);
     <div class="comments">
         <? foreach ($comment as $key => $value) : ?>
 
-            <div class="comments__item">
+            <div class="comments__item <?=($_SESSION['id']) === $value['user_id'] ? "comments__item_fx" : ""?>">
                 <p class="comments__item-time"><?= date("H:i", $value['comment_time']) ?></p>
                 <section class="comments__body">
                     <div class="comments__head">

@@ -427,9 +427,13 @@ textarea.form__input {
 
 .comments__item {
     display: flex;
+    flex-direction: row-reverse;
     padding: 10px;
     justify-content: space-around;
     margin-bottom: 15px;
+}
+.comments__item_fx {
+    flex-direction: row;
 }
 
 .comments__body {
