@@ -111,3 +111,52 @@ function userDelPhoto($imgId)
         return $pdoStat->execute([$userId, $imgId]);
     }
 }
+
+function userAddComment($descr)
+{
+    session_start();
+    $userId = $_SESSION['id'];
+    $text = htmlspecialchars($descr);
+    $time = time();
+    $pdo = db();
+    $query = "INSERT INTO `comment`(`comment_time`, `comment_text`, `user_id`) VALUES (?,?,?)";
+    $pdoStat = $pdo->prepare($query);
+    return $pdoStat->execute([$time, $text, $userId]);
+}
+function userDeleteComment($commentId)
+{
+    session_start();
+    $userId = $_SESSION['id'];
+    $pdo = db();
+    $query = "DELETE FROM `comment` WHERE `user_id`=? AND `comment_id`=?";
+    $pdoStat = $pdo->prepare($query);
+    return $pdoStat->execute([$userId, $commentId]);
+}
+function userCommentTextById($commentId)
+{
+    session_start();
+    $userId = $_SESSION['id'];
+    $pdo = db();
+    $query = "SELECT `comment_id`, `comment_text` FROM `comment` WHERE `comment_id`=? AND `user_id`=?";
+    $pdoStat = $pdo->prepare($query);
+    $pdoStat->execute([$commentId, $userId]);
+    return $pdoStat->fetch(PDO::FETCH_ASSOC);
+}
+function userEditComment($commentId, $commentText)
+{
+    session_start();
+    $userId = $_SESSION['id'];
+    $text = htmlspecialchars($commentText);
+    $pdo = db();
+    $query = "UPDATE `comment` SET `comment_text`=? WHERE `comment_id`=? AND `user_id`=?";
+    $pdoStat = $pdo->prepare($query);
+    return $pdoStat->execute([$text, $commentId, $userId]);
+}
+function getAllComments()
+{
+    $pdo = db();
+    $query = "SELECT `comment`.`comment_time`, `comment`.`comment_id`,  `comment`.`comment_text`, `user_id`, `user_name`, `images`.`img_path` FROM `comment` JOIN `images` USING(`user_id`) JOIN `users` USING(`user_id`) WHERE `images`.`img_select`=1";
+    $pdoStat = $pdo->prepare($query);
+    $pdoStat->execute();
+    return $pdoStat->fetchAll(PDO::FETCH_ASSOC);
+}

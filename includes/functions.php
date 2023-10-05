@@ -1,4 +1,5 @@
 <?
+date_default_timezone_set("Asia/Tashkent");
 $route = $_GET['route'] ?? 'home';
 $route = is_readable("./page/$route.php") ? $route : "404";
 
@@ -22,4 +23,3 @@ $date = date("Сегодня d $ruMonth o год");
 session_start();
 $userInfo = userInfo();
 $userPhotos = userGetPhotos();
-// var_dump($userPhotos);

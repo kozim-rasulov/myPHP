@@ -322,7 +322,17 @@ textarea.form__input {
     outline: none;
     transition: background 0.5s;
 }
-
+.form__btn_close {
+    opacity: 0;
+}
+.form__btn_close-on {
+    opacity: 1;
+    background-color: purple;
+    color: white;
+}
+.form__btn_close-on:hover {
+    background-color: red !important;
+}
 .form__btn:hover {
     background: #14a4ad;
     color: #fff;
