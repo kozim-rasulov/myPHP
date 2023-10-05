@@ -14,6 +14,7 @@
                         <?= $value['name'] ?>
                     </a>
                 </li>
+
             <? endif; ?>
         <? endforeach; ?>
     </ul>

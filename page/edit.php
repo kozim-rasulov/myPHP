@@ -1,3 +1,4 @@
+<?$userPhotos = userGetPhotos();?>
 <? if (isset($_SESSION['id'])) : ?>
     <main class="main">
         <section class="head">
